@@ -1,43 +1,77 @@
-# Getting Started with Create React App
+# Classy Weather App ☀️🌧
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React weather application that fetches and displays 7-day weather forecasts for any location worldwide using the Open-Meteo API.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 🌍 Search weather by city name
+- 📅 7-day weather forecast with min/max temperatures
+- 🎨 Weather icons based on conditions (sun, clouds, rain, snow, etc.)
+- 💾 LocalStorage integration to remember last searched location
+- ⚡ Debounced search with 500ms delay
+- 🚫 Request cancellation with AbortController
+- 📱 Responsive design
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+├── components/
+│   ├── Input.js       # Search input component
+│   └── Weather.js     # Weather display component with Day list
+├── hooks/
+│   └── useWeather.js  # Custom hook for weather data fetching
+├── App.js             # Main application component
+├── index.js           # Application entry point
+└── index.css          # Global styles
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- React 19.2.3
+- Open-Meteo Geocoding API
+- Open-Meteo Weather Forecast API
+- LocalStorage for data persistence
+- React Hooks (useState, useEffect)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Build
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Builds the app for production to the `build` folder.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## How It Works
+
+1. Enter a city name in the search input (minimum 3 characters)
+2. The app fetches geocoding data to get coordinates
+3. Weather forecast is retrieved using the coordinates
+4. 7-day forecast displays with emoji icons and temperature ranges
+5. Last searched location is saved to localStorage
+
+## API Integration
+
+- **Geocoding API**: Converts city names to coordinates
+- **Weather API**: Fetches temperature and weather codes for 7 days
+- **Debouncing**: 500ms delay before API calls to reduce unnecessary requests
+- **Abort Signal**: Cancels pending requests when user types new location
 
 ## Learn More
 
