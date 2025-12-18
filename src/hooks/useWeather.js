@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { convertToFlag } from "../App";
+import { convertToFlag } from "../utils/weatherHelpers";
 
 export function useWeather(location) {
   const [weather, setWeather] = useState({});

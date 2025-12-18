@@ -3,14 +3,6 @@ import { useWeather } from "./hooks/useWeather";
 import Input from "./components/Input";
 import Weather from "./components/Weather";
 
-export function convertToFlag(countryCode) {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split("")
-    .map((char) => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
-}
-
 export default function App() {
   const [location, setLocation] = useState(
     () => localStorage.getItem("lastLocation") || ""
