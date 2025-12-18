@@ -19,12 +19,15 @@ export default function App() {
       <h1>Classy Weather</h1>
       <Input location={location} onLocationChange={handleLocationChange} />
 
-      {isLoading && <p className="loader">Loading...</p>}
-
       {error && <p className="error">{error}</p>}
 
-      {weather.weathercode && (
-        <Weather weather={weather} location={displayLocation} />
+      {}
+      {isLoading ? (
+        <p className="loader">Loading...</p>
+      ) : (
+        weather.weathercode && (
+          <Weather weather={weather} location={displayLocation} />
+        )
       )}
     </div>
   );
