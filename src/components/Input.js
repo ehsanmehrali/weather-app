@@ -1,4 +1,4 @@
-export function Input({ location, onLocationChange }) {
+export default function Input({ location, onLocationChange }) {
   return (
     <div>
       <input

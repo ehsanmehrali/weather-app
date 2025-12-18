@@ -1,24 +1,7 @@
-import { useState, memo } from "react";
+import { useState } from "react";
 import { useWeather } from "./hooks/useWeather";
-import { Input } from "./components/Input";
-
-function getWeatherIcon(wmoCode) {
-  const icons = new Map([
-    [[0], "☀️"],
-    [[1], "🌤"],
-    [[2], "⛅️"],
-    [[3], "☁️"],
-    [[45, 48], "🌫"],
-    [[51, 56, 61, 66, 80], "🌦"],
-    [[53, 55, 63, 65, 57, 67, 81, 82], "🌧"],
-    [[71, 73, 75, 77, 85, 86], "🌨"],
-    [[95], "🌩"],
-    [[96, 99], "⛈"],
-  ]);
-  const arr = [...icons.keys()].find((key) => key.includes(wmoCode));
-  if (!arr) return "NOT FOUND";
-  return icons.get(arr);
-}
+import Input from "./components/Input";
+import Weather from "./components/Weather";
 
 export function convertToFlag(countryCode) {
   const codePoints = countryCode
@@ -26,12 +9,6 @@ export function convertToFlag(countryCode) {
     .split("")
     .map((char) => 127397 + char.charCodeAt());
   return String.fromCodePoint(...codePoints);
-}
-
-function formatDay(dateStr) {
-  return new Intl.DateTimeFormat("en", {
-    weekday: "short",
-  }).format(new Date(dateStr));
 }
 
 export default function App() {
@@ -58,45 +35,5 @@ export default function App() {
         <Weather weather={weather} location={displayLocation} />
       )}
     </div>
-  );
-}
-
-const Weather = memo(function Weather({ weather, location }) {
-  const {
-    temperature_2m_max: max,
-    temperature_2m_min: min,
-    time: dates,
-    weathercode: codes,
-  } = weather;
-  //   console.log(dates);
-  //   console.log(location);
-  return (
-    <div>
-      <h2>Weather {location}</h2>
-      <ul className="weather">
-        {dates.map((date, i) => (
-          <Day
-            date={date}
-            max={max.at(i)}
-            min={min.at(i)}
-            code={codes.at(i)}
-            key={date}
-            isToday={i === 0}
-          />
-        ))}
-      </ul>
-    </div>
-  );
-});
-
-function Day({ date, max, min, code, isToday }) {
-  return (
-    <li className="day">
-      <span>{getWeatherIcon(code)}</span>
-      <p>{isToday ? "Today" : formatDay(date)}</p>
-      <p>
-        {Math.floor(min)}&deg; &mdash; <strong>{Math.ceil(max)}&deg;</strong>
-      </p>
-    </li>
   );
 }
