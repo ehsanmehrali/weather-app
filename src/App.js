@@ -1,5 +1,6 @@
 import { useState, memo } from "react";
 import { useWeather } from "./hooks/useWeather";
+import { Input } from "./components/Input";
 
 function getWeatherIcon(wmoCode) {
   const icons = new Map([
@@ -56,19 +57,6 @@ export default function App() {
       {weather.weathercode && (
         <Weather weather={weather} location={displayLocation} />
       )}
-    </div>
-  );
-}
-
-function Input({ location, onLocationChange }) {
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search from location..."
-        value={location}
-        onChange={onLocationChange}
-      />
     </div>
   );
 }
